@@ -10,13 +10,22 @@ public class WorldGen : MonoBehaviour
 
     public float scale;
 
-    public Sprite grassSprite;
+    public Sprite deepWaterSprite;
     public Sprite waterSprite;
+    public Sprite sandSprite;
+    public Sprite grassSprite;
+    public Sprite highGrassSprite;
+    public Sprite mountainSprite;
+
+    public TerrainType[] terrainTypes;
 
     List<GridSpace> gridspaces = new List<GridSpace>();
 
+    public bool useRandomSeed;
+    public int seed;
+
     private void Start()
-    {
+    { 
         InitializeWorld();
     }
     private void Update()
@@ -26,6 +35,11 @@ public class WorldGen : MonoBehaviour
 
     void InitializeWorld()
     {
+        
+        if (useRandomSeed)
+        {
+            seed = Random.Range(0, 100000);
+        }
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -33,25 +47,24 @@ public class WorldGen : MonoBehaviour
                 GridSpace gs = new GridSpace();
                 gs.GSGO = new GameObject();
                 gs.GSGO.AddComponent<SpriteRenderer>();
-                gs.GSGO.transform.position = new Vector2((float)x / 5, (float)y / 5);
-                gs.GSGO.transform.localScale = new Vector2(0.2f, 0.2f);
-                /*
-                if(Mathf.PerlinNoise((x * scale) + 0.1f, (y * scale) + 0.1f) > 0.5)
+                gs.GSGO.transform.position = new Vector2((float)x / 10, (float)y / 10);
+                gs.pos = new Vector2(x, y);
+                gs.GSGO.transform.localScale = new Vector2(0.1f, 0.1f);
+                gs.GSGO.transform.SetParent(GameObject.Find("Grid Manager").transform);
+
+
+                float sample = Mathf.PerlinNoise((seed + x + 0.1f) * scale, (seed + y + 0.1f) * scale);
+  
+
+                int count = 0;
+                foreach(TerrainType tt in terrainTypes)
                 {
-                    gs.gsType = GridSpace.type.GRASS;
-                }
-                else
-                {
-                    gs.gsType = GridSpace.type.WATER;
-                }
-                */
-                if(Mathf.PerlinNoise((x * scale) + 0.1f, (y * scale) + 0.1f) > 0.3 + 0.4 * distanceFromEdge(x, y))
-                {
-                    gs.gsType = GridSpace.type.GRASS;
-                }
-                else
-                {
-                    gs.gsType = GridSpace.type.WATER;
+                    if(sample <= terrainTypes[count].height)
+                    {
+                        gs.terrainTypeID = terrainTypes[count].terrainID;
+                        break;
+                    }
+                    count++;
                 }
 
                 gridspaces.Add(gs);
@@ -64,31 +77,47 @@ public class WorldGen : MonoBehaviour
     {
         foreach(GridSpace gs in gridspaces)
         {
-            switch (gs.gsType)
+            switch (gs.terrainTypeID)
             {
-                case GridSpace.type.GRASS:
+                case 0:
+                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = mountainSprite;
+                    break;
+                case 1:
+                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = highGrassSprite;
+                    break;
+                case 2:
                     gs.GSGO.GetComponent<SpriteRenderer>().sprite = grassSprite;
                     break;
-                case GridSpace.type.WATER:
+                case 3:
+                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = sandSprite;
+                    break;
+                case 4:
                     gs.GSGO.GetComponent<SpriteRenderer>().sprite = waterSprite;
+                    break;
+                case 5:
+                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = deepWaterSprite;
                     break;
             }
         }
     }
 
-    public int distanceFromEdge(int x, int y)
-    {
-        int closeness;
-        int centerX = width / 2;
-        int centerY = height / 2;
-        //return closeness
-    }
+
 }
 
 public class GridSpace
 {
     public GameObject GSGO;
-    public enum type { WATER, SAND, GRASS, MOUNTAIN};
-    public type gsType;
+    public Vector2 pos;
+    public int terrainTypeID;
+}
 
+[System.Serializable]
+public struct TerrainType
+{
+    public string name;
+
+    [Range(0, 1)]
+    public float height;
+
+    public int terrainID;
 }
