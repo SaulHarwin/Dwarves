@@ -10,6 +10,8 @@ public class WorldGen : MonoBehaviour
 
     public float scale;
 
+    public int octaveCount;
+
     public Sprite deepWaterSprite;
     public Sprite waterSprite;
     public Sprite sandSprite;
@@ -35,7 +37,13 @@ public class WorldGen : MonoBehaviour
 
     void InitializeWorld()
     {
-        
+        float[] frequencies = new float[octaveCount];
+        for (int i = 0; i < frequencies.Length; i++)
+        {
+            frequencies[i] = Random.Range(0f, 2f);
+            Debug.Log(frequencies[i]);
+        }
+
         if (useRandomSeed)
         {
             seed = Random.Range(0, 100000);
@@ -52,14 +60,17 @@ public class WorldGen : MonoBehaviour
                 gs.GSGO.transform.localScale = new Vector2(0.1f, 0.1f);
                 gs.GSGO.transform.SetParent(GameObject.Find("Grid Manager").transform);
 
-
-                float sample = Mathf.PerlinNoise((seed + x + 0.1f) * scale, (seed + y + 0.1f) * scale);
-  
-
+                float[] samples = new float[octaveCount];
+                float Sample = 0;
+                for (int i = 0; i < frequencies.Length; i++)
+                {
+                    samples[i] = Mathf.PerlinNoise(seed + (x * scale + 0.1f) * frequencies[i], seed + (y * scale + 0.1f) * frequencies[i]);
+                    Sample += samples[i];
+                }
                 int count = 0;
                 foreach(TerrainType tt in terrainTypes)
                 {
-                    if(sample <= terrainTypes[count].height)
+                    if(Sample <= terrainTypes[count].height)
                     {
                         gs.terrainTypeID = terrainTypes[count].terrainID;
                         break;
