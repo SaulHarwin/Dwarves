@@ -1,5 +1,4 @@
-# Strategy Building Game
-
+# _Dwarves_
 This project is heavily inspired by games like Dwarf Fortress and Rimworld
 
 ## Images
