@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1F97481C-27FA-2CE7-CAFE-E882FBDB0AF2}</ProjectGuid>
+    <ProjectGuid>{EC1EFAC6-6414-7888-9A8F-D03D88DD9B9A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -55,9 +55,9 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Dwarf.cs" />
     <Compile Include="Assets\Scripts\WorldGen.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
-    <Compile Include="Assets\Scripts\Dwarf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

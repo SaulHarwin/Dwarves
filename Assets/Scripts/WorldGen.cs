@@ -9,6 +9,11 @@ public class WorldGen : MonoBehaviour
     public int height;
 
     public float scale;
+    public float amplitude;
+    public float percistance;
+    public float lacunarity;
+
+    public float numOctaves;
 
     public Sprite deepWaterSprite;
     public Sprite waterSprite;
@@ -16,10 +21,6 @@ public class WorldGen : MonoBehaviour
     public Sprite grassSprite;
     public Sprite highGrassSprite;
     public Sprite mountainSprite;
-
-    public float frequency1;
-    public float frequency2;
-    public float frequency3;
 
     public TerrainType[] terrainTypes;
 
@@ -50,13 +51,26 @@ public class WorldGen : MonoBehaviour
             {
                 GridSpace gs = new GridSpace();
                 gs.GSGO = new GameObject();
+                gs.GSGO.name = "Grid Space [" + x + ", " + y + "]";  
                 gs.GSGO.AddComponent<SpriteRenderer>();
                 gs.GSGO.transform.position = new Vector2((float)x / 10, (float)y / 10);
                 gs.pos = new Vector2(x, y);
                 gs.GSGO.transform.localScale = new Vector2(0.1f, 0.1f);
                 gs.GSGO.transform.SetParent(GameObject.Find("Grid Manager").transform);
 
-                float sample = Mathf.PerlinNoise(seed + (x + 0.1f) * scale, seed + (y + 0.1f) * scale) / DistFromCentre(gs);
+                float sample = Mathf.PerlinNoise((seed + x) * scale, (seed + y) * scale);
+                sample *= amplitude;
+
+                float newAmplitude = amplitude * percistance;
+                float newScale = scale * lacunarity;
+
+                for (int o = 0; o < numOctaves; o++, newScale *= lacunarity, newAmplitude *= percistance)
+                {
+                    float newSample = Mathf.PerlinNoise((seed + x) * newScale, (seed + y) * newScale);
+                    newSample *= newAmplitude;
+                    sample += newSample;
+                    sample /= DistFromCentre(gs);
+                }
 
                 int count = 0;
                 foreach(TerrainType tt in terrainTypes)
@@ -107,7 +121,7 @@ public class WorldGen : MonoBehaviour
     {
         float centreX = Mathf.Ceil(width / 2);
         float centreY = Mathf.Ceil(height / 2);
-        float distance = Vector2.Distance(new Vector2(centreX, centreY), gs.pos) / 5;
+        float distance = Vector2.Distance(new Vector2(centreX, centreY), gs.pos) / 6.5f;
         Debug.Log(distance);
         return distance;
     }
