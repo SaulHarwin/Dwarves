@@ -17,6 +17,10 @@ public class WorldGen : MonoBehaviour
     public Sprite highGrassSprite;
     public Sprite mountainSprite;
 
+    public float frequency1;
+    public float frequency2;
+    public float frequency3;
+
     public TerrainType[] terrainTypes;
 
     List<GridSpace> gridspaces = new List<GridSpace>();
@@ -52,7 +56,8 @@ public class WorldGen : MonoBehaviour
                 gs.GSGO.transform.localScale = new Vector2(0.1f, 0.1f);
                 gs.GSGO.transform.SetParent(GameObject.Find("Grid Manager").transform);
 
-                float sample =  Mathf.PerlinNoise(seed + (x * scale + 0.1f), seed + (y * scale + 0.1f));        
+                float sample = Mathf.PerlinNoise(seed + (x + 0.1f) * scale, seed + (y + 0.1f) * scale) / DistFromCentre(gs);
+
                 int count = 0;
                 foreach(TerrainType tt in terrainTypes)
                 {
@@ -96,6 +101,15 @@ public class WorldGen : MonoBehaviour
                     break;
             }
         }
+    }
+
+    float DistFromCentre(GridSpace gs)
+    {
+        float centreX = Mathf.Ceil(width / 2);
+        float centreY = Mathf.Ceil(height / 2);
+        float distance = Vector2.Distance(new Vector2(centreX, centreY), gs.pos) / 5;
+        Debug.Log(distance);
+        return distance;
     }
 
 

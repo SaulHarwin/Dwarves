@@ -275,7 +275,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 3.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.25, y: 2.5, z: -10}
+  m_LocalPosition: {x: 6.4, y: 3.53, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -334,8 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867637a8557dc8f4ba70c841bb990f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 106
-  height: 51
+  width: 131
+  height: 71
   scale: 0.05
   deepWaterSprite: {fileID: 21300000, guid: e57452e8a7df30d4084791e4b9d384c1, type: 3}
   waterSprite: {fileID: 21300000, guid: d04d709090cbef54dbb30a5776f2b823, type: 3}
@@ -343,21 +343,24 @@ MonoBehaviour:
   grassSprite: {fileID: 21300000, guid: dc9c581d3782b5948a13c97624e53719, type: 3}
   highGrassSprite: {fileID: 21300000, guid: 0d55671ed99900242b78e1dc63c09946, type: 3}
   mountainSprite: {fileID: 21300000, guid: 90edb429fdb93aa4fa6a23b5d2f30f29, type: 3}
+  frequency1: 2
+  frequency2: 3
+  frequency3: 4
   terrainTypes:
   - name: Deep Water
-    height: 0.024
+    height: 0.07
     terrainID: 5
   - name: Water
     height: 0.1
     terrainID: 4
   - name: Sand
-    height: 0.2
+    height: 0.125
     terrainID: 3
   - name: Grass
-    height: 0.65
+    height: 0.5
     terrainID: 2
   - name: High Grass
-    height: 0.802
+    height: 0.9
     terrainID: 1
   - name: Mountain
     height: 1
