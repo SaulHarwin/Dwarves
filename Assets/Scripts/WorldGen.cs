@@ -50,8 +50,11 @@ public class WorldGen : MonoBehaviour
     void InitializeWorld()
     {
         worldTexture = new Texture2D(width, height);
+        worldTexture.filterMode = FilterMode.Point;
         GameObject worldDisplay = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        worldDisplay.GetComponent<MeshRenderer>().material.mainTexture = worldTexture;
+        MeshRenderer mr = worldDisplay.GetComponent<MeshRenderer>();
+        mr.material.mainTexture = worldTexture;
+        mr.material.SetFloat("_Glossiness", 0f);
         worldDisplay.transform.localScale = new Vector3(width, height, 1);
         worldDisplay.transform.SetParent(GameObject.Find("Grid Manager").transform);
         if (useRandomSeed)
@@ -81,8 +84,8 @@ public class WorldGen : MonoBehaviour
                     float newSample = Mathf.PerlinNoise((seed + x) * newScale, (seed + y) * newScale);
                     newSample *= newAmplitude;
                     sample += newSample;
-                    sample /= DistFromCentre(gs);
                 }
+                sample /= DistFromCentre(gs);
 
                 int count = 0;
                 foreach(TerrainType tt in terrainTypes)

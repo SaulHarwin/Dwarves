@@ -340,7 +340,7 @@ MonoBehaviour:
   amplitude: 1
   percistance: 0.5
   lacunarity: 1.75
-  numOctaves: 2
+  numOctaves: 8
   deepWaterSprite: {fileID: 21300000, guid: e57452e8a7df30d4084791e4b9d384c1, type: 3}
   waterSprite: {fileID: 21300000, guid: d04d709090cbef54dbb30a5776f2b823, type: 3}
   sandSprite: {fileID: 21300000, guid: 59b5d009915070a489586ba85f0af7ce, type: 3}
