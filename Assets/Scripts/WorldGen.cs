@@ -5,6 +5,8 @@ using UnityEngine;
 public class WorldGen : MonoBehaviour
 {
 
+    public Gradient colors; 
+
     public int width;
     public int height;
 
@@ -88,15 +90,18 @@ public class WorldGen : MonoBehaviour
                 sample /= DistFromCentre(gs);
 
                 int count = 0;
-                foreach(TerrainType tt in terrainTypes)
-                {
-                    if(sample <= terrainTypes[count].height)
-                    {
-                        gs.terrainTypeID = terrainTypes[count].terrainID;
-                        break;
-                    }
-                    count++;
-                }
+
+                Color pixelColor =  colors.Evaluate(sample);
+                gs.color = pixelColor; 
+                // foreach(TerrainType tt in terrainTypes)
+                // {
+                //     if(sample <= terrainTypes[count].height)
+                //     {
+                //         gs.terrainTypeID = terrainTypes[count].terrainID;
+                //         break;
+                //     }
+                //     count++;
+                // }
 
                 gridspaces.Add(gs);
             }
@@ -112,27 +117,28 @@ public class WorldGen : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 GridSpace gs = returnGS(x, y);
-                switch (gs.terrainTypeID)
-                {
-                    case 0:
-                        worldTexture.SetPixel(x, y, mountainColor);
-                        break;
-                    case 1:
-                        worldTexture.SetPixel(x, y, highGrassColor);
-                        break;
-                    case 2:
-                        worldTexture.SetPixel(x, y, grassColor);
-                        break;
-                    case 3:
-                        worldTexture.SetPixel(x, y, sandColor);
-                        break;
-                    case 4:
-                        worldTexture.SetPixel(x, y, waterColor);
-                        break;
-                    case 5:
-                        worldTexture.SetPixel(x, y, deepWaterColor);
-                        break;
-                }
+                worldTexture.SetPixel(x, y, gs.color);
+            //     switch (gs.terrainTypeID)
+            //     {
+            //         case 0:
+            //             worldTexture.SetPixel(x, y, mountainColor);
+            //             break;
+            //         case 1:
+            //             worldTexture.SetPixel(x, y, highGrassColor);
+            //             break;
+            //         case 2:
+            //             worldTexture.SetPixel(x, y, grassColor);
+            //             break;
+            //         case 3:
+            //             worldTexture.SetPixel(x, y, sandColor);
+            //             break;
+            //         case 4:
+            //             worldTexture.SetPixel(x, y, waterColor);
+            //             break;
+            //         case 5:
+            //             worldTexture.SetPixel(x, y, deepWaterColor);
+            //             break;
+            //     }
             }
             worldTexture.Apply();
         }
@@ -191,6 +197,7 @@ public class GridSpace
     public GameObject GSGO;
     public Vector2 pos;
     public int terrainTypeID;
+    public Color color;
 }
 
 public class Chunk
