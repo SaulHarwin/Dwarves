@@ -15,12 +15,6 @@ public class WorldGen : MonoBehaviour
 
     public float numOctaves;
 
-    public Sprite deepWaterSprite;
-    public Sprite waterSprite;
-    public Sprite sandSprite;
-    public Sprite grassSprite;
-    public Sprite highGrassSprite;
-    public Sprite mountainSprite;
 
     public Color deepWaterColor;
     public Color waterColor;
@@ -66,11 +60,7 @@ public class WorldGen : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 GridSpace gs = new GridSpace();
-               
-               
-               // gs.GSGO.name = "Grid Space [" + x + ", " + y + "]";  
-                //gs.GSGO.AddComponent<SpriteRenderer>();
-                //gs.GSGO.transform.position = new Vector2((float)x, (float)y);
+
                 gs.pos = new Vector2(x, y);
 
                 float sample = Mathf.PerlinNoise((seed + x) * scale, (seed + y) * scale);
@@ -136,32 +126,6 @@ public class WorldGen : MonoBehaviour
             }
             worldTexture.Apply();
         }
-        /*
-        foreach(GridSpace gs in gridspaces)
-        {
-            switch (gs.terrainTypeID)
-            {
-                case 0:
-                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = mountainSprite;
-                    break;
-                case 1:
-                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = highGrassSprite;
-                    break;
-                case 2:
-                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = grassSprite;
-                    break;
-                case 3:
-                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = sandSprite;
-                    break;
-                case 4:
-                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = waterSprite;
-                    break;
-                case 5:
-                    gs.GSGO.GetComponent<SpriteRenderer>().sprite = deepWaterSprite;
-                    break;
-            }
-        }
-        */
     }
 
     float DistFromCentre(GridSpace gs)

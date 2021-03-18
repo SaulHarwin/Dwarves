@@ -275,7 +275,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 51
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4, y: 3.53, z: -10}
+  m_LocalPosition: {x: -1.5, y: -0.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -334,19 +334,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867637a8557dc8f4ba70c841bb990f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 151
+  width: 201
   height: 101
   scale: 0.05
   amplitude: 1
   percistance: 0.5
   lacunarity: 1.75
   numOctaves: 8
-  deepWaterSprite: {fileID: 21300000, guid: e57452e8a7df30d4084791e4b9d384c1, type: 3}
-  waterSprite: {fileID: 21300000, guid: d04d709090cbef54dbb30a5776f2b823, type: 3}
-  sandSprite: {fileID: 21300000, guid: 59b5d009915070a489586ba85f0af7ce, type: 3}
-  grassSprite: {fileID: 21300000, guid: dc9c581d3782b5948a13c97624e53719, type: 3}
-  highGrassSprite: {fileID: 21300000, guid: 0d55671ed99900242b78e1dc63c09946, type: 3}
-  mountainSprite: {fileID: 21300000, guid: 90edb429fdb93aa4fa6a23b5d2f30f29, type: 3}
   deepWaterColor: {r: 0, g: 0.28996888, b: 0.8666667, a: 0}
   waterColor: {r: 0, g: 0.4951705, b: 0.8666667, a: 0}
   sandColor: {r: 1, g: 0.86025244, b: 0.6273585, a: 0}
@@ -467,6 +461,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722537370}
   m_CullTransparentMesh: 0
+--- !u!1 &1752143970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1752143972}
+  - component: {fileID: 1752143971}
+  m_Layer: 0
+  m_Name: Dwarf Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1752143971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752143970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a918120cd8aaea043aa485fb60681524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DwarfCount: 1
+--- !u!4 &1752143972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752143970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.14938, y: 7.4207144, z: -230.45982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879414944
 GameObject:
   m_ObjectHideFlags: 0
