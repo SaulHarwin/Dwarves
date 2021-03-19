@@ -346,28 +346,38 @@ MonoBehaviour:
   sandColor: {r: 1, g: 0.86025244, b: 0.6273585, a: 0}
   grassColor: {r: 0, g: 0.5943396, b: 0.082253106, a: 0}
   highGrassColor: {r: 0.008796604, g: 0.3490566, b: 0, a: 0}
-  mountainColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
+  mountainColor: {r: 0.22745098, g: 0.09803922, b: 0.019607844, a: 0}
   terrainTypes:
   - name: Deep Water
+    terrainColor: {r: 0, g: 0.12585497, b: 1, a: 0}
     height: 0.07
-    terrainID: 5
+    terrainID: 6
   - name: Water
+    terrainColor: {r: 0.15018693, g: 0.58062494, b: 0.7075472, a: 0}
     height: 0.1
-    terrainID: 4
+    terrainID: 5
   - name: Sand
+    terrainColor: {r: 0.9811321, g: 0.8792662, b: 0.7728729, a: 0}
     height: 0.125
-    terrainID: 3
+    terrainID: 4
   - name: Grass
-    height: 0.5
-    terrainID: 2
+    terrainColor: {r: 0, g: 0.6037736, b: 0.19252388, a: 0}
+    height: 0.4
+    terrainID: 3
   - name: High Grass
-    height: 0.9
-    terrainID: 1
+    terrainColor: {r: 0.03748064, g: 0.33962262, b: 0, a: 0}
+    height: 0.7
+    terrainID: 2
   - name: Mountain
+    terrainColor: {r: 0.3584906, g: 0.15039253, b: 0, a: 0}
+    height: 0.97
+    terrainID: 1
+  - name: Peak
+    terrainColor: {r: 0.26415092, g: 0.14710292, b: 0.071021706, a: 0}
     height: 1
     terrainID: 0
   useRandomSeed: 1
-  seed: 125
+  seed: 65622
 --- !u!4 &1066539301
 Transform:
   m_ObjectHideFlags: 0

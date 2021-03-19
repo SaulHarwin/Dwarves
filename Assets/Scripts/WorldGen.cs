@@ -15,15 +15,9 @@ public class WorldGen : MonoBehaviour
 
     public float numOctaves;
 
-
-    public Color deepWaterColor;
-    public Color waterColor;
-    public Color sandColor;
-    public Color grassColor;
-    public Color highGrassColor;
-    public Color mountainColor;
-
     public TerrainType[] terrainTypes;
+
+    private GameObject worldDisplay;
 
     List<GridSpace> gridspaces = new List<GridSpace>();
 
@@ -34,18 +28,22 @@ public class WorldGen : MonoBehaviour
 
     private void Start()
     { 
-        InitializeWorld();
+        InitializeObjects();
     }
     private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            updateWorld();
+        }
     }
 
-    void InitializeWorld()
+    void InitializeObjects()
     {
+        gridspaces.Clear();
         worldTexture = new Texture2D(width, height);
         worldTexture.filterMode = FilterMode.Point;
-        GameObject worldDisplay = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        worldDisplay = GameObject.CreatePrimitive(PrimitiveType.Quad);
         MeshRenderer mr = worldDisplay.GetComponent<MeshRenderer>();
         mr.material.mainTexture = worldTexture;
         mr.material.SetFloat("_Glossiness", 0f);
@@ -82,7 +80,7 @@ public class WorldGen : MonoBehaviour
                 {
                     if(sample <= terrainTypes[count].height)
                     {
-                        gs.terrainTypeID = terrainTypes[count].terrainID;
+                        gs.terrainType = terrainTypes[count];
                         break;
                     }
                     count++;
@@ -91,39 +89,66 @@ public class WorldGen : MonoBehaviour
                 gridspaces.Add(gs);
             }
         }
+        
         updateWorld();
     }
 
+
+
     void updateWorld()
     {
+        gridspaces.Clear();
+        if (useRandomSeed)
+        {
+            seed = Random.Range(0, 100000);
+        }
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GridSpace gs = new GridSpace();
+
+                gs.pos = new Vector2(x, y);
+
+                float sample = Mathf.PerlinNoise((seed + x) * scale, (seed + y) * scale);
+                sample *= amplitude;
+
+                float newAmplitude = amplitude * percistance;
+                float newScale = scale * lacunarity;
+
+                for (int o = 0; o < numOctaves; o++, newScale *= lacunarity, newAmplitude *= percistance)
+                {
+                    float newSample = Mathf.PerlinNoise((seed + x) * newScale, (seed + y) * newScale);
+                    newSample *= newAmplitude;
+                    sample += newSample;
+                }
+                sample /= DistFromCentre(gs);
+
+                int count = 0;
+                foreach (TerrainType tt in terrainTypes)
+                {
+                    if (sample <= terrainTypes[count].height)
+                    {
+                        gs.terrainType = terrainTypes[count];
+                        break;
+                    }
+                    count++;
+                }
+                
+                gridspaces.Add(gs);
+            }
+        }
         
+
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 GridSpace gs = returnGS(x, y);
-                switch (gs.terrainTypeID)
-                {
-                    case 0:
-                        worldTexture.SetPixel(x, y, mountainColor);
-                        break;
-                    case 1:
-                        worldTexture.SetPixel(x, y, highGrassColor);
-                        break;
-                    case 2:
-                        worldTexture.SetPixel(x, y, grassColor);
-                        break;
-                    case 3:
-                        worldTexture.SetPixel(x, y, sandColor);
-                        break;
-                    case 4:
-                        worldTexture.SetPixel(x, y, waterColor);
-                        break;
-                    case 5:
-                        worldTexture.SetPixel(x, y, deepWaterColor);
-                        break;
-                }
+
+                worldTexture.SetPixel(x, y, gs.terrainType.terrainColor);
             }
+
             worldTexture.Apply();
         }
     }
@@ -132,7 +157,6 @@ public class WorldGen : MonoBehaviour
     {
         float centreX = Mathf.Ceil(width / 2);
         float centreY = Mathf.Ceil(height / 2);
-        float widthHeight = centreX / centreY;
         float distance = Vector2.Distance(new Vector2(centreX, centreY), gs.pos) / 5;
         return distance;
     }
@@ -154,7 +178,7 @@ public class GridSpace
 {
     public GameObject GSGO;
     public Vector2 pos;
-    public int terrainTypeID;
+    public TerrainType terrainType;
 }
 
 public class Chunk
@@ -167,6 +191,7 @@ public class Chunk
 public struct TerrainType
 {
     public string name;
+    public Color terrainColor;
 
     [Range(0, 1)]
     public float height;
