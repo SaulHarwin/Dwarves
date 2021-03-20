@@ -2,7 +2,7 @@
 This project is heavily inspired by games like Dwarf Fortress and Rimworld
 
 ## Images
-![alt text](https://cdn.discordapp.com/attachments/352055714904014851/822594826867310682/unknown.png)
+![alt text](https://media.discordapp.net/attachments/789152776135114796/822814052950605834/unknown.png?width=720&height=409)
 
 ## Generation
 World generation is done using Perlin Noise and then modifiying it via octaves and dividing each gridspace by the (1 - distance from the centre)
