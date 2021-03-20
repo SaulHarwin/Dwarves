@@ -275,7 +275,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 51
+  orthographic size: 50.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -334,50 +334,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867637a8557dc8f4ba70c841bb990f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 201
-  height: 101
+  width: 301
+  height: 201
   scale: 0.05
   amplitude: 1
-  percistance: 0.5
-  lacunarity: 1.75
-  numOctaves: 8
-  deepWaterColor: {r: 0, g: 0.28996888, b: 0.8666667, a: 0}
-  waterColor: {r: 0, g: 0.4951705, b: 0.8666667, a: 0}
-  sandColor: {r: 1, g: 0.86025244, b: 0.6273585, a: 0}
-  grassColor: {r: 0, g: 0.5943396, b: 0.082253106, a: 0}
-  highGrassColor: {r: 0.008796604, g: 0.3490566, b: 0, a: 0}
-  mountainColor: {r: 0.22745098, g: 0.09803922, b: 0.019607844, a: 0}
+  percistance: 0.45
+  lacunarity: 1.5
+  numOctaves: 6
   terrainTypes:
   - name: Deep Water
     terrainColor: {r: 0, g: 0.12585497, b: 1, a: 0}
     height: 0.07
     terrainID: 6
-  - name: Water
-    terrainColor: {r: 0.15018693, g: 0.58062494, b: 0.7075472, a: 0}
+  - name: Mid Water
+    terrainColor: {r: 0, g: 0.45979524, b: 1, a: 0}
+    height: 0.09
+    terrainID: 6
+  - name: Shallow Water
+    terrainColor: {r: 0.19339621, g: 0.741784, b: 1, a: 0}
     height: 0.1
     terrainID: 5
   - name: Sand
     terrainColor: {r: 0.9811321, g: 0.8792662, b: 0.7728729, a: 0}
     height: 0.125
     terrainID: 4
-  - name: Grass
+  - name: Low Grass
     terrainColor: {r: 0, g: 0.6037736, b: 0.19252388, a: 0}
-    height: 0.4
+    height: 0.15
+    terrainID: 3
+  - name: Lower Mid Grass
+    terrainColor: {r: 0, g: 0.509434, b: 0.1620926, a: 0}
+    height: 0.25
+    terrainID: 3
+  - name: Mid Grass
+    terrainColor: {r: 0, g: 0.4245283, b: 0.1338897, a: 0}
+    height: 0.35
+    terrainID: 3
+  - name: Upper Mid Grass
+    terrainColor: {r: 0, g: 0.3773585, b: 0.11879804, a: 0}
+    height: 0.5
     terrainID: 3
   - name: High Grass
     terrainColor: {r: 0.03748064, g: 0.33962262, b: 0, a: 0}
-    height: 0.7
+    height: 0.6
     terrainID: 2
   - name: Mountain
     terrainColor: {r: 0.3584906, g: 0.15039253, b: 0, a: 0}
-    height: 0.97
+    height: 0.8
+    terrainID: 1
+  - name: Mid Mountain
+    terrainColor: {r: 0.2830189, g: 0.118276544, b: 0, a: 0}
+    height: 0.85
     terrainID: 1
   - name: Peak
     terrainColor: {r: 0.26415092, g: 0.14710292, b: 0.071021706, a: 0}
+    height: 0.98
+    terrainID: 0
+  - name: Snowy Peak
+    terrainColor: {r: 1, g: 1, b: 1, a: 0}
     height: 1
     terrainID: 0
   useRandomSeed: 1
-  seed: 65622
+  seed: 74064
 --- !u!4 &1066539301
 Transform:
   m_ObjectHideFlags: 0

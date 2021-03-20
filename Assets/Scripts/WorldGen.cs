@@ -13,6 +13,8 @@ public class WorldGen : MonoBehaviour
     public float percistance;
     public float lacunarity;
 
+    public float distanceDivider;
+
     public float numOctaves;
 
     public TerrainType[] terrainTypes;
@@ -49,47 +51,6 @@ public class WorldGen : MonoBehaviour
         mr.material.SetFloat("_Glossiness", 0f);
         worldDisplay.transform.localScale = new Vector3(width, height, 1);
         worldDisplay.transform.SetParent(GameObject.Find("Grid Manager").transform);
-        if (useRandomSeed)
-        {
-            seed = Random.Range(0, 100000);
-        }
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                GridSpace gs = new GridSpace();
-
-                gs.pos = new Vector2(x, y);
-
-                float sample = Mathf.PerlinNoise((seed + x) * scale, (seed + y) * scale);
-                sample *= amplitude;
-
-                float newAmplitude = amplitude * percistance;
-                float newScale = scale * lacunarity;
-
-                for (int o = 0; o < numOctaves; o++, newScale *= lacunarity, newAmplitude *= percistance)
-                {
-                    float newSample = Mathf.PerlinNoise((seed + x) * newScale, (seed + y) * newScale);
-                    newSample *= newAmplitude;
-                    sample += newSample;
-                }
-                sample /= DistFromCentre(gs);
-
-                int count = 0;
-                foreach(TerrainType tt in terrainTypes)
-                {
-                    if(sample <= terrainTypes[count].height)
-                    {
-                        gs.terrainType = terrainTypes[count];
-                        break;
-                    }
-                    count++;
-                }
-
-                gridspaces.Add(gs);
-            }
-        }
-        
         updateWorld();
     }
 
@@ -123,6 +84,11 @@ public class WorldGen : MonoBehaviour
                     sample += newSample;
                 }
                 sample /= DistFromCentre(gs);
+                Mathf.Clamp(sample, 0, 1);
+                if(sample >= 1)
+                {
+                    sample = 1;
+                }
 
                 int count = 0;
                 foreach (TerrainType tt in terrainTypes)
@@ -136,6 +102,8 @@ public class WorldGen : MonoBehaviour
                 }
                 
                 gridspaces.Add(gs);
+                
+
             }
         }
         
@@ -157,7 +125,7 @@ public class WorldGen : MonoBehaviour
     {
         float centreX = Mathf.Ceil(width / 2);
         float centreY = Mathf.Ceil(height / 2);
-        float distance = Vector2.Distance(new Vector2(centreX, centreY), gs.pos) / 5;
+        float distance = Vector2.Distance(new Vector2(centreX, centreY), gs.pos) / (5 * (height / 100) / distanceDivider);
         return distance;
     }
 
