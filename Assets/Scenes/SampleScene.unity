@@ -334,12 +334,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867637a8557dc8f4ba70c841bb990f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 301
-  height: 201
+  width: 201
+  height: 101
   scale: 0.05
   amplitude: 1
   percistance: 0.45
   lacunarity: 1.5
+  distanceDivider: 1
   numOctaves: 6
   terrainTypes:
   - name: Deep Water

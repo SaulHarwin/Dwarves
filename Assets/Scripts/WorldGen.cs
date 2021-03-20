@@ -84,7 +84,6 @@ public class WorldGen : MonoBehaviour
                     sample += newSample;
                 }
                 sample /= DistFromCentre(gs);
-                Mathf.Clamp(sample, 0, 1);
                 if(sample >= 1)
                 {
                     sample = 1;
@@ -117,8 +116,9 @@ public class WorldGen : MonoBehaviour
                 worldTexture.SetPixel(x, y, gs.terrainType.terrainColor);
             }
 
-            worldTexture.Apply();
+            
         }
+        worldTexture.Apply();
     }
 
     float DistFromCentre(GridSpace gs)

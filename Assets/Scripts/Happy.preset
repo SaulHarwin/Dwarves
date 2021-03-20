@@ -26,11 +26,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: width
-    value: 201
+    value: 301
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: height
-    value: 101
+    value: 201
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: scale
@@ -46,6 +46,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: lacunarity
+    value: 1.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: distanceDivider
     value: 1.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}

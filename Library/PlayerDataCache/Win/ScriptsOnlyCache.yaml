@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Dwarves
     - WorldGen
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
@@ -45,9 +46,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12130}
     - Class: 114
-      Script: {instanceID: 12892}
+      Script: {instanceID: 12890}
     - Class: 114
-      Script: {instanceID: 13670}
+      Script: {instanceID: 13668}
+    - Class: 114
+      Script: {instanceID: 14410}
     - Class: 114
       Script: {instanceID: 14486}
     - Class: 114
@@ -60,13 +63,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -263,12 +266,6 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Dwarf
-  - hash:
-      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -353,7 +350,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: b3d269f2a2203d4673f4513d6d67598a
+      Hash: 87dace5c8752c971794adcd0d5d9c583
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WorldGen
@@ -435,6 +432,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: 0c0aa35760a15bbc0419e256bf67cdfe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Dwarves
   - hash:
       serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
